@@ -1,3 +1,6 @@
+.title {
+  text-align: center;
+}
 .container {
   max-width: 1000px;
   margin: 40px auto;
@@ -5,4 +8,37 @@
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+}
+.input-label-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.input-label-wrap > input {
+}
+.input-label-wrap > div {
+  display: inline-flex;
+  flex-direction: column;
+}
+.input-label-wrap > button {
+  width: 80px;
+}
+
+table {
+  width: 91%;
+  table-layout: fixed;
+  display: table;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transform: translateX(45px);
+  border-collapse: collapse;
+}
+thead {
+  background-color: rgb(188, 183, 176);
+  color: #ffffff;
+  height: 2.5em;
 }
