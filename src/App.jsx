@@ -60,7 +60,7 @@ function App() {
             bronze: bronze,
           };
         } else {
-          alert('등록되지 않은 국가입니다.');
+          return c;
         }
       });
       setCountries(updateCountry);
@@ -128,21 +128,34 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {countries.map((country) => (
-              <tr>
-                <td>{country.countryName}</td>
-                <td>{country.gold}</td>
-                <td>{country.silver}</td>
-                <td>{country.bronze}</td>
-                <td>
-                  <button
-                    onClick={() => handleDeleteCountry(country.countryName)}
-                  >
-                    삭제
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {countries
+              .slice()
+              .sort((a, b) => {
+                if (b.gold !== a.gold) {
+                  return b.gold - a.gold;
+                }
+                if (b.silver !== a.silver) {
+                  return b.silver - a.silver;
+                }
+                if (b.bronze !== a.bronze) {
+                  return b.bronze - a.bronze;
+                }
+              })
+              .map((country) => (
+                <tr>
+                  <td>{country.countryName}</td>
+                  <td>{country.gold}</td>
+                  <td>{country.silver}</td>
+                  <td>{country.bronze}</td>
+                  <td>
+                    <button
+                      onClick={() => handleDeleteCountry(country.countryName)}
+                    >
+                      삭제
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
