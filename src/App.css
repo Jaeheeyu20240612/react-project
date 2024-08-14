@@ -17,8 +17,7 @@
   text-align: center;
   margin-bottom: 20px;
 }
-.input-label-wrap > input {
-}
+
 .input-label-wrap > div {
   display: inline-flex;
   flex-direction: column;

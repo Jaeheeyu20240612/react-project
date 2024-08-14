@@ -25,48 +25,52 @@ const Form = ({
     setBronze(event.target.value);
   };
 
+  const FormData = [
+    {
+      labelText: '국가명',
+      id: 'countryName',
+      value: country,
+      handler: inputCountryHandler,
+    },
+    {
+      labelText: '금메달',
+      id: 'goldMedal',
+      value: gold,
+      handler: inputGoldHandler,
+    },
+    {
+      labelText: '은메달',
+      id: 'silverMedal',
+      value: silver,
+      handler: inputSilverHandler,
+    },
+    {
+      labelText: '동메달',
+      id: 'bronzeMedal',
+      value: bronze,
+      handler: inputBronzeHandler,
+    },
+  ];
+
   return (
     <div>
-      <div className='input-label-wrap'>
-        <div>
-          <label htmlFor='countryName'>국가명</label>
-          <input
-            id='countryName'
-            value={country}
-            onChange={inputCountryHandler}
-            type='text'
-          />
-        </div>
-        <div>
-          <label htmlFor='goldMedal'>금메달</label>
-          <input
-            id='goldMedal'
-            value={gold}
-            onChange={inputGoldHandler}
-            type='text'
-          />
-        </div>
-        <div>
-          <label htmlFor='silverMedal'>은메달</label>
-          <input
-            id='silverMedal'
-            value={silver}
-            onChange={inputSilverHandler}
-            type='text'
-          />
-        </div>
-        <div>
-          <label htmlFor='bronzeMedal'>동메달</label>
-          <input
-            id='bronzeMedal'
-            value={bronze}
-            onChange={inputBronzeHandler}
-            type='text'
-          />
-        </div>
-        <button onClick={handleAddCountry}>국가 추가</button>
+      <form onSubmit={handleAddCountry} className='input-label-wrap'>
+        {FormData.map((data) => {
+          return (
+            <div>
+              <label htmlFor={data.id}>{data.labelText}</label>
+              <input
+                id={data.id}
+                value={data.value}
+                onChange={data.handler}
+                type='text'
+              />
+            </div>
+          );
+        })}
+        <button type='submit'>국가 추가</button>
         <button onClick={handleUpdateCountry}>업데이트</button>
-      </div>
+      </form>
     </div>
   );
 };
