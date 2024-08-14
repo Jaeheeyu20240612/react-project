@@ -10,11 +10,22 @@ function App() {
   const [silver, setSilver] = useState('0');
   const [bronze, setBronze] = useState('0');
 
+  const existingCountry = () => {
+    return countries.find((c) => {
+      if (c.countryName === country) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  };
   const handleAddCountry = (event) => {
     event.preventDefault();
-    const existingCountry = countries.find((c) => c.countryName === country);
-    if (existingCountry) {
+    if (existingCountry()) {
       return alert('이미 추가된 국가입니다.');
+    }
+    if (!country) {
+      return alert('국가명을 입력해주세요');
     }
     const newCountries = {
       countryName: country,
@@ -24,15 +35,18 @@ function App() {
     };
 
     setCountries([...countries, newCountries]);
-    console.log('countries--->', countries);
+    setCountry('');
+    setGold('');
+    setSilver('');
+    setBronze('');
   };
 
   const handleUpdateCountry = (event) => {
     event.preventDefault();
-    const existCountry = countries.find((item) => {
-      return item.countryName === country;
-    });
-    if (existCountry) {
+    if (!country) {
+      return alert('국가명을 입력해주세요');
+    }
+    if (existingCountry()) {
       const updateCountry = countries.map((c) => {
         if (c.countryName === country) {
           return {
@@ -49,12 +63,20 @@ function App() {
     } else {
       alert('등록되지 않은 국가입니다.');
     }
+    setCountry('');
+    setGold('');
+    setSilver('');
+    setBronze('');
   };
 
   const handleDeleteCountry = (name) => {
     const filteredCountries = countries.filter((c) => c.countryName !== name);
     setCountries(filteredCountries);
   };
+
+  if (countries.countryName === 0) {
+    Table.clas;
+  }
 
   return (
     <div className='container'>
@@ -72,7 +94,14 @@ function App() {
         handleAddCountry={handleAddCountry}
         handleUpdateCountry={handleUpdateCountry}
       />
-      <Table countries={countries} handleDeleteCountry={handleDeleteCountry} />
+      {countries.length > 0 ? (
+        <Table
+          countries={countries}
+          handleDeleteCountry={handleDeleteCountry}
+        />
+      ) : (
+        <p className='nonTableComment'>메달 수를 업데이트해주세요!</p>
+      )}
     </div>
   );
 }
